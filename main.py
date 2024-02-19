@@ -1,7 +1,15 @@
 
-def print_hi(name):
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+class Game:
+    def __init__(self):
+            self.difficulty = None
+
+    def difficulty(self):
+        if self == "Easy":
+            return self.difficulty == "Easy"
+        elif self.difficulty == "Hard":
+            return self.difficulty == "Hard"
+
 
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    Game()
 
