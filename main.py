@@ -14,6 +14,7 @@ class Game:
         if self.difficulty == "exit":
             self.exit()
 
+
     def exit(self):
         print("Current score: ", self.player_score)
         exit()
@@ -119,7 +120,7 @@ class Game:
 def get_difficulty():
     while True:
         difficulty = input("Select your difficulty (Easy, Hard or Extreme): ").lower()
-        if difficulty in ["easy", "hard","extreme","exit"]:
+        if difficulty in ["easy","hard","extreme","exit"]:
             return difficulty
 
         else:
