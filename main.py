@@ -10,6 +10,7 @@ class Game:
             return self.difficulty == "Hard"
         elif self.difficulty == "Extreme":
             return self.difficulty == "Extreme"
+        return self.difficulty
 
 
 if __name__ == '__main__':
