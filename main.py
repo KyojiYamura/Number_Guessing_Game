@@ -2,6 +2,7 @@ import random
 import sqlite3
 from colorama import init, Fore, Style
 
+
 class Game:
     hot_streak_easy = 0
     hot_streak_hard = 0
@@ -18,19 +19,19 @@ class Game:
         if self.difficulty == "extreme":
             self.play_difficult_extreme()
         if self.difficulty == "exit":
-            self.exit()
+           self.exit()
         if self.difficulty =="scores":
             self.print_scoreboard()
     def print_scoreboard(self):
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM scoreboard")
-        print("ID\tName\tScore")
+        print("Name\tScore")
         print("---------------------")
         rows = cursor.fetchall()
         for row in rows:
-            print(f"{row[0]}\t{row[1]}\t{row[2]}")
+            print(f"{row[1]}\t{row[2]}")
 
-        self.conn.close()  # Close the database connection
+        self.conn.close()
     def create_table(self):
         cursor = self.conn.cursor()
         cursor.execute('''
@@ -51,8 +52,8 @@ class Game:
         print("Your score was: ", self.score())
         self.create_table()
         player_name = get_player_name()
-        game.add_score(player_name, game.score())
-
+        score = self.score()  # Get the score from the current instance
+        self.add_score(player_name, score)  # Corrected to use self instead of Game
         Game.lost = True
         exit()
 
@@ -165,6 +166,7 @@ class Game:
             else:
                 print("You need 7 numbers")
 
+
     def get_random_number(self):
         generated_number = set()
         while len(generated_number) < self.x:
@@ -177,7 +179,11 @@ def get_player_name():
 
 def get_difficulty():
     while True:
-        difficulty = input("Select your difficulty (Easy, Hard or Extreme): ").lower()
+        print("To start type: Easy, Hard or Extreme")
+        print("To view scoreboard: Scores")
+        print("To exit: Exit")
+        print("____________________________________________________")
+        difficulty = input("Select command: ").lower()
         if difficulty in ["easy", "hard", "extreme", "exit",'scores']:
             return difficulty
 
@@ -186,7 +192,6 @@ def get_difficulty():
 
 
 if __name__ == '__main__':
-    print("________________Welcome to the game!________________")
     game = None
     while Game.lost != True:
         print("________________Guess the new number________________")
